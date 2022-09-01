@@ -1,3 +1,4 @@
+from random import random
 import numpy as np
 import math
 import csv
@@ -53,15 +54,6 @@ def createparticle(mass, xcor, ycor, xvel, yvel):
     id += 1
     global particles
     particles = np.append(particles, info, axis=0)
-
-def gravoriginal(mass, x2, y2, x1, y1): # 2 is the object with a mass
-    angle = math.atan2((y2 - y1), (x2 - x1))
-    distance = ((x2 - x1) ** 2) + ((y2 - y1) ** 2)
-    print(math.degrees(angle))
-    if distance == 0.0:
-        return 0, 0
-    acc = (G * mass) / (distance)
-    return math.cos(angle)*acc, math.sin(angle)*acc
 
 def grav(mass, x2, y2, x1, y1): # 2 is the object with a mass
     distance = math.sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2))
@@ -172,6 +164,6 @@ print(gravconst)
 print(math.sqrt((gravconst * 4000000) / 10000))
 setup()
 createparticle(1, 10000, 0, 0, 3.97131087904067e-05)
-print(particles)
-simulate(1582)
-print(particles)
+for i in range(200):
+    createparticle(1, int((random() - 0.5) * 20000), int((random() - 0.5) * 20000), 0, 0)
+simulate(500)
